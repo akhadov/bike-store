@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using Application.Abstractions.Authentication;
 using Application.Abstractions.Data;
+using Dapper;
 using Infrastructure.Authentication;
 using Infrastructure.Authorization;
 using Infrastructure.Database;
@@ -13,6 +14,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 using SharedKernel;
 
 namespace Infrastructure;
@@ -41,6 +43,11 @@ public static class DependencyInjection
     private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
         string? connectionString = configuration.GetConnectionString("Database");
+
+        services.AddSingleton<IDbConnectionFactory>(_ =>
+            new DbConnectionFactory(new NpgsqlDataSourceBuilder(connectionString).Build()));
+
+        SqlMapper.AddTypeHandler(new GenericArrayHandler<string>());
 
         services.AddDbContext<ApplicationDbContext>(
             options => options

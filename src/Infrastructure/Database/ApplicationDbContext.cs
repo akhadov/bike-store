@@ -1,4 +1,5 @@
-﻿using Application.Abstractions.Data;
+﻿using System.Data;
+using Application.Abstractions.Data;
 using Domain.Brands;
 using Domain.Categories;
 using Domain.Customers;
@@ -11,6 +12,7 @@ using Domain.Todos;
 using Domain.Users;
 using Infrastructure.DomainEvents;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using SharedKernel;
 
 namespace Infrastructure.Database;
@@ -87,5 +89,9 @@ public sealed class ApplicationDbContext(
             .ToList();
 
         await domainEventsDispatcher.DispatchAsync(domainEvents);
+    }
+    public async Task<IDbTransaction> BeginTransactionAsync()
+    {
+        return (await Database.BeginTransactionAsync()).GetDbTransaction();
     }
 }
