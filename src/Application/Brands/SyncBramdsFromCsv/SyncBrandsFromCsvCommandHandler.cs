@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Abstractions.Data;
+using Application.Abstractions.Messaging;
+using SharedKernel;
 
 namespace Application.Brands.SyncBramdsFromCsv;
-internal class SyncBrandsFromCsvCommandHandler
+internal sealed class SyncBrandsFromCsvCommandHandler(
+    //IDbConnectionFactory dbConnectionFactory
+    )
+    : ICommandHandler<SyncBrandsFromCsvCommand>
 {
+    public Task<Result> Handle(SyncBrandsFromCsvCommand command, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }

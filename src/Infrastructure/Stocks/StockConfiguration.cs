@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Products;
+﻿using Domain.Products;
 using Domain.Stocks;
 using Domain.Stores;
 using Infrastructure.Database;
@@ -16,7 +11,7 @@ internal sealed class StockConfiguration : IEntityTypeConfiguration<Stok>
 {
     public void Configure(EntityTypeBuilder<Stok> builder)
     {
-        builder.ToTable("stocks", Schemas.Bronze);
+        builder.ToTable("stocks", Schemas.Silver);
 
         builder.HasKey(s => new { s.StoreId, s.ProductId });
 

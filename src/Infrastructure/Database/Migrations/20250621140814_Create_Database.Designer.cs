@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250616232651_Create_Database")]
+    [Migration("20250621140814_Create_Database")]
     partial class Create_Database
     {
         /// <inheritdoc />
@@ -45,7 +45,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasKey("BrandId")
                         .HasName("pk_brands");
 
-                    b.ToTable("brands", "bronze");
+                    b.ToTable("brands", "silver");
                 });
 
             modelBuilder.Entity("Domain.Categories.Category", b =>
@@ -66,7 +66,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasKey("CategoryId")
                         .HasName("pk_categories");
 
-                    b.ToTable("categories", "bronze");
+                    b.ToTable("categories", "silver");
                 });
 
             modelBuilder.Entity("Domain.Customers.Customer", b =>
@@ -128,7 +128,7 @@ namespace Infrastructure.Database.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_customers_email");
 
-                    b.ToTable("customers", "bronze");
+                    b.ToTable("customers", "silver");
                 });
 
             modelBuilder.Entity("Domain.Orders.Order", b =>
@@ -180,7 +180,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasIndex("StoreId")
                         .HasDatabaseName("ix_orders_store_id");
 
-                    b.ToTable("orders", "bronze");
+                    b.ToTable("orders", "silver");
                 });
 
             modelBuilder.Entity("Domain.Orders.OrderItem", b =>
@@ -221,7 +221,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasIndex("ProductId")
                         .HasDatabaseName("ix_order_items_product_id");
 
-                    b.ToTable("order_items", "bronze");
+                    b.ToTable("order_items", "silver");
                 });
 
             modelBuilder.Entity("Domain.Products.Product", b =>
@@ -264,7 +264,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasIndex("CategoryId")
                         .HasDatabaseName("ix_products_category_id");
 
-                    b.ToTable("products", "bronze");
+                    b.ToTable("products", "silver");
                 });
 
             modelBuilder.Entity("Domain.Staffs.Staff", b =>
@@ -320,7 +320,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasIndex("ManagerId")
                         .HasDatabaseName("ix_staffs_manager_id");
 
-                    b.ToTable("staffs", "bronze");
+                    b.ToTable("staffs", "silver");
                 });
 
             modelBuilder.Entity("Domain.Stocks.Stok", b =>
@@ -345,7 +345,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasIndex("ProductId")
                         .HasDatabaseName("ix_stocks_product_id");
 
-                    b.ToTable("stocks", "bronze");
+                    b.ToTable("stocks", "silver");
                 });
 
             modelBuilder.Entity("Domain.Stores.Store", b =>
@@ -400,7 +400,7 @@ namespace Infrastructure.Database.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_stores_email");
 
-                    b.ToTable("stores", "bronze");
+                    b.ToTable("stores", "silver");
                 });
 
             modelBuilder.Entity("Domain.Todos.TodoItem", b =>
@@ -450,7 +450,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_todo_items_user_id");
 
-                    b.ToTable("todo_items", "gold");
+                    b.ToTable("todo_items", "silver");
                 });
 
             modelBuilder.Entity("Domain.Users.User", b =>
@@ -487,7 +487,7 @@ namespace Infrastructure.Database.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_users_email");
 
-                    b.ToTable("users", "gold");
+                    b.ToTable("users", "silver");
                 });
 
             modelBuilder.Entity("Domain.Orders.Order", b =>

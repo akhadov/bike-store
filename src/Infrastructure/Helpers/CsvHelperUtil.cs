@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CsvHelper;
 
 namespace Infrastructure.Helpers;
@@ -16,5 +12,20 @@ public static class CsvHelperUtil
         using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 
         return csv.GetRecords<T>().ToList();
+    }
+
+    public static DataTable ReadDataTable(string filePath)
+    {
+        using var reader = new StreamReader(filePath);
+
+        using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+
+        using var dataReader = new CsvDataReader(csv);
+
+        var dataTable = new DataTable();
+
+        dataTable.Load(dataReader);
+
+        return dataTable;
     }
 }

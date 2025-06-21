@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Staffs;
+﻿using Domain.Staffs;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -14,7 +9,7 @@ internal sealed class StaffConfiguration : IEntityTypeConfiguration<Staff>
 {
     public void Configure(EntityTypeBuilder<Staff> builder)
     {
-        builder.ToTable("staffs", Schemas.Bronze);
+        builder.ToTable("staffs", Schemas.Silver);
 
         builder.HasKey(s => s.StaffId);
 

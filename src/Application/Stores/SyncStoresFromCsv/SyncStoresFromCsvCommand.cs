@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.Stores.SyncStoresFromCsv;
+﻿namespace Application.Stores.SyncStoresFromCsv;
 internal class SyncStoresFromCsvCommand
 {
 }

@@ -15,14 +15,11 @@ namespace Infrastructure.Database.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "bronze");
-
-            migrationBuilder.EnsureSchema(
-                name: "gold");
+                name: "silver");
 
             migrationBuilder.CreateTable(
                 name: "brands",
-                schema: "bronze",
+                schema: "silver",
                 columns: table => new
                 {
                     brand_id = table.Column<int>(type: "integer", nullable: false)
@@ -36,7 +33,7 @@ namespace Infrastructure.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "categories",
-                schema: "bronze",
+                schema: "silver",
                 columns: table => new
                 {
                     category_id = table.Column<int>(type: "integer", nullable: false)
@@ -50,7 +47,7 @@ namespace Infrastructure.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "customers",
-                schema: "bronze",
+                schema: "silver",
                 columns: table => new
                 {
                     customer_id = table.Column<int>(type: "integer", nullable: false)
@@ -71,7 +68,7 @@ namespace Infrastructure.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "staffs",
-                schema: "bronze",
+                schema: "silver",
                 columns: table => new
                 {
                     staff_id = table.Column<int>(type: "integer", nullable: false)
@@ -90,14 +87,14 @@ namespace Infrastructure.Database.Migrations
                     table.ForeignKey(
                         name: "fk_staffs_staffs_manager_id",
                         column: x => x.manager_id,
-                        principalSchema: "bronze",
+                        principalSchema: "silver",
                         principalTable: "staffs",
                         principalColumn: "staff_id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "stores",
-                schema: "bronze",
+                schema: "silver",
                 columns: table => new
                 {
                     store_id = table.Column<int>(type: "integer", nullable: false)
@@ -117,7 +114,7 @@ namespace Infrastructure.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "users",
-                schema: "gold",
+                schema: "silver",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -133,7 +130,7 @@ namespace Infrastructure.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "products",
-                schema: "bronze",
+                schema: "silver",
                 columns: table => new
                 {
                     product_id = table.Column<int>(type: "integer", nullable: false)
@@ -150,14 +147,14 @@ namespace Infrastructure.Database.Migrations
                     table.ForeignKey(
                         name: "fk_products_brands_brand_id",
                         column: x => x.brand_id,
-                        principalSchema: "bronze",
+                        principalSchema: "silver",
                         principalTable: "brands",
                         principalColumn: "brand_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_products_categories_category_id",
                         column: x => x.category_id,
-                        principalSchema: "bronze",
+                        principalSchema: "silver",
                         principalTable: "categories",
                         principalColumn: "category_id",
                         onDelete: ReferentialAction.Cascade);
@@ -165,7 +162,7 @@ namespace Infrastructure.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "orders",
-                schema: "bronze",
+                schema: "silver",
                 columns: table => new
                 {
                     order_id = table.Column<int>(type: "integer", nullable: false)
@@ -184,21 +181,21 @@ namespace Infrastructure.Database.Migrations
                     table.ForeignKey(
                         name: "fk_orders_customers_customer_id",
                         column: x => x.customer_id,
-                        principalSchema: "bronze",
+                        principalSchema: "silver",
                         principalTable: "customers",
                         principalColumn: "customer_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_orders_staffs_staff_id",
                         column: x => x.staff_id,
-                        principalSchema: "bronze",
+                        principalSchema: "silver",
                         principalTable: "staffs",
                         principalColumn: "staff_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_orders_stores_store_id",
                         column: x => x.store_id,
-                        principalSchema: "bronze",
+                        principalSchema: "silver",
                         principalTable: "stores",
                         principalColumn: "store_id",
                         onDelete: ReferentialAction.Cascade);
@@ -206,7 +203,7 @@ namespace Infrastructure.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "todo_items",
-                schema: "gold",
+                schema: "silver",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -225,7 +222,7 @@ namespace Infrastructure.Database.Migrations
                     table.ForeignKey(
                         name: "fk_todo_items_users_user_id",
                         column: x => x.user_id,
-                        principalSchema: "gold",
+                        principalSchema: "silver",
                         principalTable: "users",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -233,7 +230,7 @@ namespace Infrastructure.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "stocks",
-                schema: "bronze",
+                schema: "silver",
                 columns: table => new
                 {
                     store_id = table.Column<int>(type: "integer", nullable: false),
@@ -246,14 +243,14 @@ namespace Infrastructure.Database.Migrations
                     table.ForeignKey(
                         name: "fk_stocks_products_product_id",
                         column: x => x.product_id,
-                        principalSchema: "bronze",
+                        principalSchema: "silver",
                         principalTable: "products",
                         principalColumn: "product_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_stocks_stores_store_id",
                         column: x => x.store_id,
-                        principalSchema: "bronze",
+                        principalSchema: "silver",
                         principalTable: "stores",
                         principalColumn: "store_id",
                         onDelete: ReferentialAction.Cascade);
@@ -261,7 +258,7 @@ namespace Infrastructure.Database.Migrations
 
             migrationBuilder.CreateTable(
                 name: "order_items",
-                schema: "bronze",
+                schema: "silver",
                 columns: table => new
                 {
                     item_id = table.Column<int>(type: "integer", nullable: false)
@@ -278,14 +275,14 @@ namespace Infrastructure.Database.Migrations
                     table.ForeignKey(
                         name: "fk_order_items_orders_order_id",
                         column: x => x.order_id,
-                        principalSchema: "bronze",
+                        principalSchema: "silver",
                         principalTable: "orders",
                         principalColumn: "order_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_order_items_products_product_id",
                         column: x => x.product_id,
-                        principalSchema: "bronze",
+                        principalSchema: "silver",
                         principalTable: "products",
                         principalColumn: "product_id",
                         onDelete: ReferentialAction.Cascade);
@@ -293,88 +290,88 @@ namespace Infrastructure.Database.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "ix_customers_email",
-                schema: "bronze",
+                schema: "silver",
                 table: "customers",
                 column: "email",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_order_items_order_id",
-                schema: "bronze",
+                schema: "silver",
                 table: "order_items",
                 column: "order_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_order_items_product_id",
-                schema: "bronze",
+                schema: "silver",
                 table: "order_items",
                 column: "product_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_orders_customer_id",
-                schema: "bronze",
+                schema: "silver",
                 table: "orders",
                 column: "customer_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_orders_staff_id",
-                schema: "bronze",
+                schema: "silver",
                 table: "orders",
                 column: "staff_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_orders_store_id",
-                schema: "bronze",
+                schema: "silver",
                 table: "orders",
                 column: "store_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_products_brand_id",
-                schema: "bronze",
+                schema: "silver",
                 table: "products",
                 column: "brand_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_products_category_id",
-                schema: "bronze",
+                schema: "silver",
                 table: "products",
                 column: "category_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_staffs_email",
-                schema: "bronze",
+                schema: "silver",
                 table: "staffs",
                 column: "email",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_staffs_manager_id",
-                schema: "bronze",
+                schema: "silver",
                 table: "staffs",
                 column: "manager_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_stocks_product_id",
-                schema: "bronze",
+                schema: "silver",
                 table: "stocks",
                 column: "product_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_stores_email",
-                schema: "bronze",
+                schema: "silver",
                 table: "stores",
                 column: "email",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_todo_items_user_id",
-                schema: "gold",
+                schema: "silver",
                 table: "todo_items",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_users_email",
-                schema: "gold",
+                schema: "silver",
                 table: "users",
                 column: "email",
                 unique: true);
@@ -385,47 +382,47 @@ namespace Infrastructure.Database.Migrations
         {
             migrationBuilder.DropTable(
                 name: "order_items",
-                schema: "bronze");
+                schema: "silver");
 
             migrationBuilder.DropTable(
                 name: "stocks",
-                schema: "bronze");
+                schema: "silver");
 
             migrationBuilder.DropTable(
                 name: "todo_items",
-                schema: "gold");
+                schema: "silver");
 
             migrationBuilder.DropTable(
                 name: "orders",
-                schema: "bronze");
+                schema: "silver");
 
             migrationBuilder.DropTable(
                 name: "products",
-                schema: "bronze");
+                schema: "silver");
 
             migrationBuilder.DropTable(
                 name: "users",
-                schema: "gold");
+                schema: "silver");
 
             migrationBuilder.DropTable(
                 name: "customers",
-                schema: "bronze");
+                schema: "silver");
 
             migrationBuilder.DropTable(
                 name: "staffs",
-                schema: "bronze");
+                schema: "silver");
 
             migrationBuilder.DropTable(
                 name: "stores",
-                schema: "bronze");
+                schema: "silver");
 
             migrationBuilder.DropTable(
                 name: "brands",
-                schema: "bronze");
+                schema: "silver");
 
             migrationBuilder.DropTable(
                 name: "categories",
-                schema: "bronze");
+                schema: "silver");
         }
     }
 }

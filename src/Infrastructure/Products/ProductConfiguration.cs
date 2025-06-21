@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Brands;
+﻿using Domain.Brands;
 using Domain.Categories;
 using Domain.Products;
 using Infrastructure.Database;
@@ -15,7 +10,7 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> builder)
     {
-        builder.ToTable("products", Schemas.Bronze);
+        builder.ToTable("products", Schemas.Silver);
 
         builder.HasKey(p => p.ProductId);
 

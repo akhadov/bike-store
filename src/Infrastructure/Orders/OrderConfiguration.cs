@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Customers;
+﻿using Domain.Customers;
 using Domain.Orders;
 using Domain.Staffs;
 using Domain.Stores;
@@ -17,7 +12,7 @@ internal sealed class OrderConfiguration : IEntityTypeConfiguration<Order>
 {
     public void Configure(EntityTypeBuilder<Order> builder)
     {
-        builder.ToTable("orders", Schemas.Bronze);
+        builder.ToTable("orders", Schemas.Silver);
 
         builder.HasKey(o => o.OrderId);
 
