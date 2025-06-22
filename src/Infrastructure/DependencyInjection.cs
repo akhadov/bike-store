@@ -6,6 +6,7 @@ using Dapper;
 using Infrastructure.Authentication;
 using Infrastructure.Authorization;
 using Infrastructure.BackgroundJobs;
+using Infrastructure.BackgroundJobs.SyncTablesJob;
 using Infrastructure.Database;
 using Infrastructure.DomainEvents;
 using Infrastructure.Services;
@@ -120,11 +121,15 @@ public static class DependencyInjection
     {
         services.Configure<CsvSyncJobOptions>(configuration.GetSection("CsvSyncJob"));
 
+        services.Configure<SyncSilverFromBronzeJobOptions>(configuration.GetSection("SyncSilverJob"));
+
         services.AddQuartz();
 
         services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
 
         services.ConfigureOptions<ProcessCsvSyncJobSetup>();
+
+        services.ConfigureOptions<SyncSilverFromBronzeJobSetup>();
 
         return services;
     }
