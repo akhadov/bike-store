@@ -1,6 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <Compile Remove="Customers\SyncCustomersFromCsv\**" />
+    <EmbeddedResource Remove="Customers\SyncCustomersFromCsv\**" />
+    <None Remove="Customers\SyncCustomersFromCsv\**" />
+  </ItemGroup>
+
+  <ItemGroup>
 	<PackageReference Include="Dapper" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
@@ -16,10 +22,6 @@
 
   <ItemGroup>
 	<InternalsVisibleTo Include="Application.UnitTests" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Customers\SyncCustomersFromCsv\" />
   </ItemGroup>
 
 </Project>

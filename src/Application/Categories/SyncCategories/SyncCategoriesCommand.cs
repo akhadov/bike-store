@@ -1,5 +1,5 @@
-﻿using Application.Abstractions.Messaging;
+using Application.Abstractions.Messaging;
 
 namespace Application.Categories.SyncCategories;
 
-public sealed class SyncCategoriesCommand : ICommand;
+public sealed record SyncCategoriesCommand(string FilePath) : ICommand;
