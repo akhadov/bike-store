@@ -2,7 +2,6 @@
 
   <ItemGroup>
 	<PackageReference Include="Quartz.Extensions.Hosting" />
-	<PackageReference Include="CsvHelper" />
     <PackageReference Include="AspNetCore.HealthChecks.NpgSql" />
     <PackageReference Include="EFCore.NamingConventions" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />

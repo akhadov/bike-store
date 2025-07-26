@@ -9,7 +9,7 @@ internal sealed class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
     {
-        builder.ToTable("customers", Schemas.Silver);
+        builder.ToTable("customers", Schemas.Bronze);
 
         builder.HasKey(c => c.CustomerId);
 

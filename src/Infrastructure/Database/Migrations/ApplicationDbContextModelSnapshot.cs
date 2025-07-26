@@ -42,7 +42,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasKey("BrandId")
                         .HasName("pk_brands");
 
-                    b.ToTable("brands", "silver");
+                    b.ToTable("brands", "bronze");
                 });
 
             modelBuilder.Entity("Domain.Categories.Category", b =>
@@ -63,7 +63,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasKey("CategoryId")
                         .HasName("pk_categories");
 
-                    b.ToTable("categories", "silver");
+                    b.ToTable("categories", "bronze");
                 });
 
             modelBuilder.Entity("Domain.Customers.Customer", b =>
@@ -125,7 +125,7 @@ namespace Infrastructure.Database.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_customers_email");
 
-                    b.ToTable("customers", "silver");
+                    b.ToTable("customers", "bronze");
                 });
 
             modelBuilder.Entity("Domain.Orders.Order", b =>
@@ -177,7 +177,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasIndex("StoreId")
                         .HasDatabaseName("ix_orders_store_id");
 
-                    b.ToTable("orders", "silver");
+                    b.ToTable("orders", "bronze");
                 });
 
             modelBuilder.Entity("Domain.Orders.OrderItem", b =>
@@ -218,7 +218,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasIndex("ProductId")
                         .HasDatabaseName("ix_order_items_product_id");
 
-                    b.ToTable("order_items", "silver");
+                    b.ToTable("order_items", "bronze");
                 });
 
             modelBuilder.Entity("Domain.Products.Product", b =>
@@ -261,7 +261,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasIndex("CategoryId")
                         .HasDatabaseName("ix_products_category_id");
 
-                    b.ToTable("products", "silver");
+                    b.ToTable("products", "bronze");
                 });
 
             modelBuilder.Entity("Domain.Staffs.Staff", b =>
@@ -317,7 +317,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasIndex("ManagerId")
                         .HasDatabaseName("ix_staffs_manager_id");
 
-                    b.ToTable("staffs", "silver");
+                    b.ToTable("staffs", "bronze");
                 });
 
             modelBuilder.Entity("Domain.Stocks.Stok", b =>
@@ -342,7 +342,7 @@ namespace Infrastructure.Database.Migrations
                     b.HasIndex("ProductId")
                         .HasDatabaseName("ix_stocks_product_id");
 
-                    b.ToTable("stocks", "silver");
+                    b.ToTable("stocks", "bronze");
                 });
 
             modelBuilder.Entity("Domain.Stores.Store", b =>
@@ -397,7 +397,7 @@ namespace Infrastructure.Database.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_stores_email");
 
-                    b.ToTable("stores", "silver");
+                    b.ToTable("stores", "bronze");
                 });
 
             modelBuilder.Entity("Domain.Todos.TodoItem", b =>

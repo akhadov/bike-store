@@ -11,7 +11,7 @@ internal sealed class StockConfiguration : IEntityTypeConfiguration<Stok>
 {
     public void Configure(EntityTypeBuilder<Stok> builder)
     {
-        builder.ToTable("stocks", Schemas.Silver);
+        builder.ToTable("stocks", Schemas.Bronze);
 
         builder.HasKey(s => new { s.StoreId, s.ProductId });
 

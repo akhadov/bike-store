@@ -9,7 +9,7 @@ internal sealed class StoreConfiguration : IEntityTypeConfiguration<Store>
 {
     public void Configure(EntityTypeBuilder<Store> builder)
     {
-        builder.ToTable("stores", Schemas.Silver);
+        builder.ToTable("stores", Schemas.Bronze);
 
         builder.HasKey(s => s.StoreId);
 

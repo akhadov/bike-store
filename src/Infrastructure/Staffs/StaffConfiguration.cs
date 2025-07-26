@@ -9,7 +9,7 @@ internal sealed class StaffConfiguration : IEntityTypeConfiguration<Staff>
 {
     public void Configure(EntityTypeBuilder<Staff> builder)
     {
-        builder.ToTable("staffs", Schemas.Silver);
+        builder.ToTable("staffs", Schemas.Bronze);
 
         builder.HasKey(s => s.StaffId);
 

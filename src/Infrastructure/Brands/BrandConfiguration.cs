@@ -9,7 +9,7 @@ internal sealed class BrandConfiguration : IEntityTypeConfiguration<Brand>
 {
     public void Configure(EntityTypeBuilder<Brand> builder)
     {
-        builder.ToTable("brands", Schemas.Silver);
+        builder.ToTable("brands", Schemas.Bronze);
 
         builder.HasKey(b => b.BrandId);
 
