@@ -59,14 +59,21 @@ internal sealed class SyncStocksCommandHandler(
 
         await connection.ExecuteAsync(upsertSql, stocks, transaction: transaction);
 
+        int[] storeIds = stocks.Select(s => s.StoreId).ToArray();
+        int[] productIds = stocks.Select(s => s.ProductId).ToArray();
+
         const string deleteRemovedSql = """
             DELETE FROM bronze.stocks
-            WHERE (store_id, product_id) NOT IN (SELECT store_id, product_id FROM UNNEST(@StockIds) AS s(store_id integer, product_id integer))
+            WHERE (store_id, product_id) NOT IN (
+                SELECT UNNEST(@StoreIds) AS store_id, UNNEST(@ProductIds) AS product_id
+            )
             """;
 
-        var stockIds = stocks.Select(s => new { s.StoreId, s.ProductId }).ToArray();
-
-        await connection.ExecuteAsync(deleteRemovedSql, new { StockIds = stockIds }, transaction: transaction);
+        await connection.ExecuteAsync(
+            deleteRemovedSql,
+            new { StoreIds = storeIds, ProductIds = productIds },
+            transaction: transaction
+        );
 
         await transaction.CommitAsync(cancellationToken);
 
