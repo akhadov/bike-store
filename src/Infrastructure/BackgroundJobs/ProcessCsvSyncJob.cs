@@ -1,16 +1,16 @@
 ﻿using Application.Abstractions.Messaging;
-using Application.Brands.SyncBramds;
-using Application.Categories.SyncCategories;
-using Application.Customers.SyncCustomers;
-using Application.Staffs.SyncStaffs;
-using Application.Stores.SyncStores;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Quartz;
-using Application.Orders.SyncOrderItems;
-using Application.Orders.SyncOrders;
-using Application.Products.SyncProducts;
-using Application.Stoks.SyncStocks;
+using Application.Bronze.Brands.SyncBramds;
+using Application.Bronze.Categories.SyncCategories;
+using Application.Bronze.Staffs.SyncStaffs;
+using Application.Bronze.Orders.SyncOrderItems;
+using Application.Bronze.Orders.SyncOrders;
+using Application.Bronze.Products.SyncProducts;
+using Application.Bronze.Stores.SyncStores;
+using Application.Bronze.Customers.SyncCustomers;
+using Application.Bronze.Stoks.SyncStocks;
 
 namespace Infrastructure.BackgroundJobs;
 

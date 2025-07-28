@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <Compile Remove="Customers\SyncCustomersFromCsv\**" />
-    <EmbeddedResource Remove="Customers\SyncCustomersFromCsv\**" />
-    <None Remove="Customers\SyncCustomersFromCsv\**" />
+    <Compile Remove="Bronze\Customers\SyncCustomersFromCsv\**" />
+    <EmbeddedResource Remove="Bronze\Customers\SyncCustomersFromCsv\**" />
+    <None Remove="Bronze\Customers\SyncCustomersFromCsv\**" />
   </ItemGroup>
 
   <ItemGroup>

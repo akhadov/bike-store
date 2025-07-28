@@ -1,5 +1,5 @@
 ﻿using Application.Abstractions.Messaging;
-using Application.Users.GetById;
+using Application.Bronze.Users.GetById;
 using SharedKernel;
 using Web.Api.Extensions;
 using Web.Api.Infrastructure;

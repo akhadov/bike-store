@@ -1,13 +1,13 @@
-﻿using Domain.Brands;
-using Domain.Categories;
-using Domain.Customers;
-using Domain.Orders;
-using Domain.Products;
-using Domain.Staffs;
-using Domain.Stocks;
-using Domain.Stores;
-using Domain.Todos;
-using Domain.Users;
+﻿using Domain.Bronze.Brands;
+using Domain.Bronze.Categories;
+using Domain.Bronze.Customers;
+using Domain.Bronze.Orders;
+using Domain.Bronze.Products;
+using Domain.Bronze.Staffs;
+using Domain.Bronze.Stocks;
+using Domain.Bronze.Stores;
+using Domain.Bronze.Todos;
+using Domain.Bronze.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Abstractions.Data;

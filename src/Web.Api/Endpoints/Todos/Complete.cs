@@ -1,5 +1,5 @@
 ﻿using Application.Abstractions.Messaging;
-using Application.Todos.Complete;
+using Application.Bronze.Todos.Complete;
 using SharedKernel;
 using Web.Api.Extensions;
 using Web.Api.Infrastructure;
