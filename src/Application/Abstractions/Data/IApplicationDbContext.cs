@@ -14,6 +14,7 @@ namespace Application.Abstractions.Data;
 
 public interface IApplicationDbContext
 {
+    // Bronze
     DbSet<Brand> Brands { get; }
     DbSet<Category> Categories { get; }
     DbSet<Customer> Customers { get; }
@@ -25,6 +26,8 @@ public interface IApplicationDbContext
     DbSet<Store> Stores { get; }
     DbSet<User> Users { get; }
     DbSet<TodoItem> TodoItems { get; }
+
+    // Silver
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
