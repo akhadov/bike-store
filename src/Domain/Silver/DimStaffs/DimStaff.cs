@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CsvHelper.Configuration.Attributes;
-using Domain.Bronze.Staffs;
-using SharedKernel;
+﻿using SharedKernel;
 
 namespace Domain.Silver.DimStaffs;
 

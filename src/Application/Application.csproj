@@ -24,8 +24,4 @@
 	<InternalsVisibleTo Include="Application.UnitTests" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Silver\" />
-  </ItemGroup>
-
 </Project>

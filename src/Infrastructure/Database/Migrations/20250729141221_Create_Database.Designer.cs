@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250726123826_Create_Database")]
+    [Migration("20250729141221_Create_Database")]
     partial class Create_Database
     {
         /// <inheritdoc />
@@ -27,7 +27,7 @@ namespace Infrastructure.Database.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Brands.Brand", b =>
+            modelBuilder.Entity("Domain.Bronze.Brands.Brand", b =>
                 {
                     b.Property<int>("BrandId")
                         .ValueGeneratedOnAdd()
@@ -48,7 +48,7 @@ namespace Infrastructure.Database.Migrations
                     b.ToTable("brands", "bronze");
                 });
 
-            modelBuilder.Entity("Domain.Categories.Category", b =>
+            modelBuilder.Entity("Domain.Bronze.Categories.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -69,7 +69,7 @@ namespace Infrastructure.Database.Migrations
                     b.ToTable("categories", "bronze");
                 });
 
-            modelBuilder.Entity("Domain.Customers.Customer", b =>
+            modelBuilder.Entity("Domain.Bronze.Customers.Customer", b =>
                 {
                     b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
@@ -131,7 +131,7 @@ namespace Infrastructure.Database.Migrations
                     b.ToTable("customers", "bronze");
                 });
 
-            modelBuilder.Entity("Domain.Orders.Order", b =>
+            modelBuilder.Entity("Domain.Bronze.Orders.Order", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
@@ -183,7 +183,7 @@ namespace Infrastructure.Database.Migrations
                     b.ToTable("orders", "bronze");
                 });
 
-            modelBuilder.Entity("Domain.Orders.OrderItem", b =>
+            modelBuilder.Entity("Domain.Bronze.Orders.OrderItem", b =>
                 {
                     b.Property<int>("ItemId")
                         .ValueGeneratedOnAdd()
@@ -224,7 +224,7 @@ namespace Infrastructure.Database.Migrations
                     b.ToTable("order_items", "bronze");
                 });
 
-            modelBuilder.Entity("Domain.Products.Product", b =>
+            modelBuilder.Entity("Domain.Bronze.Products.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
@@ -267,7 +267,7 @@ namespace Infrastructure.Database.Migrations
                     b.ToTable("products", "bronze");
                 });
 
-            modelBuilder.Entity("Domain.Staffs.Staff", b =>
+            modelBuilder.Entity("Domain.Bronze.Staffs.Staff", b =>
                 {
                     b.Property<int>("StaffId")
                         .ValueGeneratedOnAdd()
@@ -323,7 +323,7 @@ namespace Infrastructure.Database.Migrations
                     b.ToTable("staffs", "bronze");
                 });
 
-            modelBuilder.Entity("Domain.Stocks.Stok", b =>
+            modelBuilder.Entity("Domain.Bronze.Stocks.Stok", b =>
                 {
                     b.Property<int>("StoreId")
                         .HasColumnType("integer")
@@ -348,7 +348,7 @@ namespace Infrastructure.Database.Migrations
                     b.ToTable("stocks", "bronze");
                 });
 
-            modelBuilder.Entity("Domain.Stores.Store", b =>
+            modelBuilder.Entity("Domain.Bronze.Stores.Store", b =>
                 {
                     b.Property<int>("StoreId")
                         .ValueGeneratedOnAdd()
@@ -403,7 +403,7 @@ namespace Infrastructure.Database.Migrations
                     b.ToTable("stores", "bronze");
                 });
 
-            modelBuilder.Entity("Domain.Todos.TodoItem", b =>
+            modelBuilder.Entity("Domain.Bronze.Todos.TodoItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -453,7 +453,7 @@ namespace Infrastructure.Database.Migrations
                     b.ToTable("todo_items", "silver");
                 });
 
-            modelBuilder.Entity("Domain.Users.User", b =>
+            modelBuilder.Entity("Domain.Bronze.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -490,23 +490,333 @@ namespace Infrastructure.Database.Migrations
                     b.ToTable("users", "silver");
                 });
 
-            modelBuilder.Entity("Domain.Orders.Order", b =>
+            modelBuilder.Entity("Domain.Silver.DimBrands.DimBrand", b =>
                 {
-                    b.HasOne("Domain.Customers.Customer", null)
+                    b.Property<int>("BrandId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("brand_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BrandId"));
+
+                    b.Property<string>("BrandName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("brand_name");
+
+                    b.HasKey("BrandId")
+                        .HasName("pk_dim_brands");
+
+                    b.ToTable("dim_brands", "silver");
+                });
+
+            modelBuilder.Entity("Domain.Silver.DimCategories.DimCategory", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("category_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CategoryId"));
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("category_name");
+
+                    b.HasKey("CategoryId")
+                        .HasName("pk_dim_categories");
+
+                    b.ToTable("dim_categories", "silver");
+                });
+
+            modelBuilder.Entity("Domain.Silver.DimCustomers.DimCustomer", b =>
+                {
+                    b.Property<int>("CustomerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("customer_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CustomerId"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("city");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("email");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("first_name");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("last_name");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("text")
+                        .HasColumnName("phone");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("state");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("street");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("zip_code");
+
+                    b.HasKey("CustomerId")
+                        .HasName("pk_dim_customers");
+
+                    b.ToTable("dim_customers", "silver");
+                });
+
+            modelBuilder.Entity("Domain.Silver.DimProducts.DimProduct", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("product_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProductId"));
+
+                    b.Property<int>("BrandId")
+                        .HasColumnType("integer")
+                        .HasColumnName("brand_id");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("category_id");
+
+                    b.Property<decimal>("ListPrice")
+                        .HasColumnType("numeric")
+                        .HasColumnName("list_price");
+
+                    b.Property<int>("ModelYear")
+                        .HasColumnType("integer")
+                        .HasColumnName("model_year");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("product_name");
+
+                    b.HasKey("ProductId")
+                        .HasName("pk_dim_products");
+
+                    b.ToTable("dim_products", "silver");
+                });
+
+            modelBuilder.Entity("Domain.Silver.DimStaffs.DimStaff", b =>
+                {
+                    b.Property<int>("StaffId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("staff_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("StaffId"));
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean")
+                        .HasColumnName("active");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("email");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("first_name");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("last_name");
+
+                    b.Property<int?>("ManagerId")
+                        .HasColumnType("integer")
+                        .HasColumnName("manager_id");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("text")
+                        .HasColumnName("phone");
+
+                    b.Property<int>("StoreId")
+                        .HasColumnType("integer")
+                        .HasColumnName("store_id");
+
+                    b.HasKey("StaffId")
+                        .HasName("pk_dim_staffs");
+
+                    b.HasIndex("ManagerId")
+                        .HasDatabaseName("ix_dim_staffs_manager_id");
+
+                    b.ToTable("dim_staffs", "silver");
+                });
+
+            modelBuilder.Entity("Domain.Silver.DimStores.DimStore", b =>
+                {
+                    b.Property<int>("StoreId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("store_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("StoreId"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("city");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("email");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("phone");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("state");
+
+                    b.Property<string>("StoreName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("store_name");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("street");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("zip_code");
+
+                    b.HasKey("StoreId")
+                        .HasName("pk_dim_stores");
+
+                    b.ToTable("dim_stores", "silver");
+                });
+
+            modelBuilder.Entity("Domain.Silver.FactInventories.FactInventory", b =>
+                {
+                    b.Property<int>("StoreId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("store_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("StoreId"));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer")
+                        .HasColumnName("product_id");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("quantity");
+
+                    b.HasKey("StoreId")
+                        .HasName("pk_fact_inventory");
+
+                    b.ToTable("fact_inventory", "silver");
+                });
+
+            modelBuilder.Entity("Domain.Silver.FactSales.FactSale", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .HasColumnType("integer")
+                        .HasColumnName("order_id");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("integer")
+                        .HasColumnName("item_id");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer")
+                        .HasColumnName("customer_id");
+
+                    b.Property<decimal>("Discount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("discount");
+
+                    b.Property<decimal>("ListPrice")
+                        .HasColumnType("numeric")
+                        .HasColumnName("list_price");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("order_date");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer")
+                        .HasColumnName("product_id");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("quantity");
+
+                    b.Property<DateTime?>("ShippedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("shipped_date");
+
+                    b.Property<int>("StaffId")
+                        .HasColumnType("integer")
+                        .HasColumnName("staff_id");
+
+                    b.Property<int>("StoreId")
+                        .HasColumnType("integer")
+                        .HasColumnName("store_id");
+
+                    b.Property<decimal>("TotalPrice")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("numeric")
+                        .HasColumnName("total_price")
+                        .HasComputedColumnSql("quantity * list_price * (1 - discount)", true);
+
+                    b.HasKey("OrderId", "ItemId")
+                        .HasName("pk_fact_sales");
+
+                    b.ToTable("fact_sales", "silver");
+                });
+
+            modelBuilder.Entity("Domain.Bronze.Orders.Order", b =>
+                {
+                    b.HasOne("Domain.Bronze.Customers.Customer", null)
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_orders_customers_customer_id");
 
-                    b.HasOne("Domain.Staffs.Staff", null)
+                    b.HasOne("Domain.Bronze.Staffs.Staff", null)
                         .WithMany()
                         .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_orders_staffs_staff_id");
 
-                    b.HasOne("Domain.Stores.Store", null)
+                    b.HasOne("Domain.Bronze.Stores.Store", null)
                         .WithMany()
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -514,16 +824,16 @@ namespace Infrastructure.Database.Migrations
                         .HasConstraintName("fk_orders_stores_store_id");
                 });
 
-            modelBuilder.Entity("Domain.Orders.OrderItem", b =>
+            modelBuilder.Entity("Domain.Bronze.Orders.OrderItem", b =>
                 {
-                    b.HasOne("Domain.Orders.Order", null)
+                    b.HasOne("Domain.Bronze.Orders.Order", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_order_items_orders_order_id");
 
-                    b.HasOne("Domain.Products.Product", null)
+                    b.HasOne("Domain.Bronze.Products.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -531,16 +841,16 @@ namespace Infrastructure.Database.Migrations
                         .HasConstraintName("fk_order_items_products_product_id");
                 });
 
-            modelBuilder.Entity("Domain.Products.Product", b =>
+            modelBuilder.Entity("Domain.Bronze.Products.Product", b =>
                 {
-                    b.HasOne("Domain.Brands.Brand", null)
+                    b.HasOne("Domain.Bronze.Brands.Brand", null)
                         .WithMany()
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_products_brands_brand_id");
 
-                    b.HasOne("Domain.Categories.Category", null)
+                    b.HasOne("Domain.Bronze.Categories.Category", null)
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -548,9 +858,9 @@ namespace Infrastructure.Database.Migrations
                         .HasConstraintName("fk_products_categories_category_id");
                 });
 
-            modelBuilder.Entity("Domain.Staffs.Staff", b =>
+            modelBuilder.Entity("Domain.Bronze.Staffs.Staff", b =>
                 {
-                    b.HasOne("Domain.Staffs.Staff", "Manager")
+                    b.HasOne("Domain.Bronze.Staffs.Staff", "Manager")
                         .WithMany("Subordinates")
                         .HasForeignKey("ManagerId")
                         .HasConstraintName("fk_staffs_staffs_manager_id");
@@ -558,16 +868,16 @@ namespace Infrastructure.Database.Migrations
                     b.Navigation("Manager");
                 });
 
-            modelBuilder.Entity("Domain.Stocks.Stok", b =>
+            modelBuilder.Entity("Domain.Bronze.Stocks.Stok", b =>
                 {
-                    b.HasOne("Domain.Products.Product", null)
+                    b.HasOne("Domain.Bronze.Products.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_stocks_products_product_id");
 
-                    b.HasOne("Domain.Stores.Store", null)
+                    b.HasOne("Domain.Bronze.Stores.Store", null)
                         .WithMany()
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -575,9 +885,9 @@ namespace Infrastructure.Database.Migrations
                         .HasConstraintName("fk_stocks_stores_store_id");
                 });
 
-            modelBuilder.Entity("Domain.Todos.TodoItem", b =>
+            modelBuilder.Entity("Domain.Bronze.Todos.TodoItem", b =>
                 {
-                    b.HasOne("Domain.Users.User", null)
+                    b.HasOne("Domain.Bronze.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -585,12 +895,27 @@ namespace Infrastructure.Database.Migrations
                         .HasConstraintName("fk_todo_items_users_user_id");
                 });
 
-            modelBuilder.Entity("Domain.Orders.Order", b =>
+            modelBuilder.Entity("Domain.Silver.DimStaffs.DimStaff", b =>
+                {
+                    b.HasOne("Domain.Silver.DimStaffs.DimStaff", "Manager")
+                        .WithMany("Subordinates")
+                        .HasForeignKey("ManagerId")
+                        .HasConstraintName("fk_dim_staffs_dim_staffs_manager_id");
+
+                    b.Navigation("Manager");
+                });
+
+            modelBuilder.Entity("Domain.Bronze.Orders.Order", b =>
                 {
                     b.Navigation("OrderItems");
                 });
 
-            modelBuilder.Entity("Domain.Staffs.Staff", b =>
+            modelBuilder.Entity("Domain.Bronze.Staffs.Staff", b =>
+                {
+                    b.Navigation("Subordinates");
+                });
+
+            modelBuilder.Entity("Domain.Silver.DimStaffs.DimStaff", b =>
                 {
                     b.Navigation("Subordinates");
                 });

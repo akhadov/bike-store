@@ -1,18 +1,18 @@
 ﻿using Application.Abstractions.Messaging;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Quartz;
 using Application.Bronze.Brands.SyncBramds;
 using Application.Bronze.Categories.SyncCategories;
-using Application.Bronze.Staffs.SyncStaffs;
+using Application.Bronze.Customers.SyncCustomers;
 using Application.Bronze.Orders.SyncOrderItems;
 using Application.Bronze.Orders.SyncOrders;
 using Application.Bronze.Products.SyncProducts;
-using Application.Bronze.Stores.SyncStores;
-using Application.Bronze.Customers.SyncCustomers;
+using Application.Bronze.Staffs.SyncStaffs;
 using Application.Bronze.Stoks.SyncStocks;
+using Application.Bronze.Stores.SyncStores;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Quartz;
 
-namespace Infrastructure.BackgroundJobs;
+namespace Infrastructure.BackgroundJobs.SyncFromCsv;
 
 [DisallowConcurrentExecution]
 internal sealed class ProcessCsvSyncJob(

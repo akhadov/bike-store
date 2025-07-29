@@ -70,6 +70,157 @@ namespace Infrastructure.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "dim_brands",
+                schema: "silver",
+                columns: table => new
+                {
+                    brand_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    brand_name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_dim_brands", x => x.brand_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "dim_categories",
+                schema: "silver",
+                columns: table => new
+                {
+                    category_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    category_name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_dim_categories", x => x.category_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "dim_customers",
+                schema: "silver",
+                columns: table => new
+                {
+                    customer_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    first_name = table.Column<string>(type: "text", nullable: false),
+                    last_name = table.Column<string>(type: "text", nullable: false),
+                    phone = table.Column<string>(type: "text", nullable: true),
+                    email = table.Column<string>(type: "text", nullable: false),
+                    street = table.Column<string>(type: "text", nullable: false),
+                    city = table.Column<string>(type: "text", nullable: false),
+                    state = table.Column<string>(type: "text", nullable: false),
+                    zip_code = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_dim_customers", x => x.customer_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "dim_products",
+                schema: "silver",
+                columns: table => new
+                {
+                    product_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    product_name = table.Column<string>(type: "text", nullable: false),
+                    brand_id = table.Column<int>(type: "integer", nullable: false),
+                    category_id = table.Column<int>(type: "integer", nullable: false),
+                    model_year = table.Column<int>(type: "integer", nullable: false),
+                    list_price = table.Column<decimal>(type: "numeric", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_dim_products", x => x.product_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "dim_staffs",
+                schema: "silver",
+                columns: table => new
+                {
+                    staff_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    first_name = table.Column<string>(type: "text", nullable: false),
+                    last_name = table.Column<string>(type: "text", nullable: false),
+                    email = table.Column<string>(type: "text", nullable: false),
+                    phone = table.Column<string>(type: "text", nullable: true),
+                    active = table.Column<bool>(type: "boolean", nullable: false),
+                    store_id = table.Column<int>(type: "integer", nullable: false),
+                    manager_id = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_dim_staffs", x => x.staff_id);
+                    table.ForeignKey(
+                        name: "fk_dim_staffs_dim_staffs_manager_id",
+                        column: x => x.manager_id,
+                        principalSchema: "silver",
+                        principalTable: "dim_staffs",
+                        principalColumn: "staff_id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "dim_stores",
+                schema: "silver",
+                columns: table => new
+                {
+                    store_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    store_name = table.Column<string>(type: "text", nullable: false),
+                    phone = table.Column<string>(type: "text", nullable: false),
+                    email = table.Column<string>(type: "text", nullable: false),
+                    street = table.Column<string>(type: "text", nullable: false),
+                    city = table.Column<string>(type: "text", nullable: false),
+                    state = table.Column<string>(type: "text", nullable: false),
+                    zip_code = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_dim_stores", x => x.store_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "fact_inventory",
+                schema: "silver",
+                columns: table => new
+                {
+                    store_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    product_id = table.Column<int>(type: "integer", nullable: false),
+                    quantity = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_fact_inventory", x => x.store_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "fact_sales",
+                schema: "silver",
+                columns: table => new
+                {
+                    order_id = table.Column<int>(type: "integer", nullable: false),
+                    item_id = table.Column<int>(type: "integer", nullable: false),
+                    order_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    shipped_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    store_id = table.Column<int>(type: "integer", nullable: false),
+                    staff_id = table.Column<int>(type: "integer", nullable: false),
+                    customer_id = table.Column<int>(type: "integer", nullable: false),
+                    product_id = table.Column<int>(type: "integer", nullable: false),
+                    quantity = table.Column<int>(type: "integer", nullable: false),
+                    list_price = table.Column<decimal>(type: "numeric", nullable: false),
+                    discount = table.Column<decimal>(type: "numeric", nullable: false),
+                    total_price = table.Column<decimal>(type: "numeric", nullable: false, computedColumnSql: "quantity * list_price * (1 - discount)", stored: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_fact_sales", x => new { x.order_id, x.item_id });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "staffs",
                 schema: "bronze",
                 columns: table => new
@@ -299,6 +450,12 @@ namespace Infrastructure.Database.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "ix_dim_staffs_manager_id",
+                schema: "silver",
+                table: "dim_staffs",
+                column: "manager_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_order_items_order_id",
                 schema: "bronze",
                 table: "order_items",
@@ -383,6 +540,38 @@ namespace Infrastructure.Database.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "dim_brands",
+                schema: "silver");
+
+            migrationBuilder.DropTable(
+                name: "dim_categories",
+                schema: "silver");
+
+            migrationBuilder.DropTable(
+                name: "dim_customers",
+                schema: "silver");
+
+            migrationBuilder.DropTable(
+                name: "dim_products",
+                schema: "silver");
+
+            migrationBuilder.DropTable(
+                name: "dim_staffs",
+                schema: "silver");
+
+            migrationBuilder.DropTable(
+                name: "dim_stores",
+                schema: "silver");
+
+            migrationBuilder.DropTable(
+                name: "fact_inventory",
+                schema: "silver");
+
+            migrationBuilder.DropTable(
+                name: "fact_sales",
+                schema: "silver");
+
             migrationBuilder.DropTable(
                 name: "order_items",
                 schema: "bronze");

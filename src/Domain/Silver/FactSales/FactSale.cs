@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SharedKernel;
+﻿using SharedKernel;
 
 namespace Domain.Silver.FactSales;
 
@@ -15,7 +10,7 @@ public sealed class FactSale : Entity
 
     public DateTime OrderDate { get; set; }
 
-    public DateTime ShippedDate { get; set; }
+    public DateTime? ShippedDate { get; set; }
 
     public int StoreId { get; set; }
 

@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.BackgroundJobs;
+﻿namespace Infrastructure.BackgroundJobs.SyncFromCsv;
 public sealed class CsvSyncJobOptions
 {
     public int IntervalInSeconds { get; init; }

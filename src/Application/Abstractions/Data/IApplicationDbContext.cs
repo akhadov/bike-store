@@ -8,6 +8,14 @@ using Domain.Bronze.Stocks;
 using Domain.Bronze.Stores;
 using Domain.Bronze.Todos;
 using Domain.Bronze.Users;
+using Domain.Silver.DimBrands;
+using Domain.Silver.DimCategories;
+using Domain.Silver.DimCustomers;
+using Domain.Silver.DimProducts;
+using Domain.Silver.DimStaffs;
+using Domain.Silver.DimStores;
+using Domain.Silver.FactInventories;
+using Domain.Silver.FactSales;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Abstractions.Data;
@@ -28,6 +36,14 @@ public interface IApplicationDbContext
     DbSet<TodoItem> TodoItems { get; }
 
     // Silver
+    DbSet<DimBrand> DimBrands { get; }
+    DbSet<DimCategory> DimCategories { get; }
+    DbSet<DimCustomer> DimCustomers { get; }
+    DbSet<DimProduct> DimProducts { get; }
+    DbSet<DimStaff> DimStaffs { get; }
+    DbSet<DimStore> DimStores { get; }
+    DbSet<FactInventory> FactInventory { get; }
+    DbSet<FactSale> FactSales { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

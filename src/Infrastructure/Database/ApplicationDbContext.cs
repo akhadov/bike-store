@@ -10,6 +10,14 @@ using Domain.Bronze.Stocks;
 using Domain.Bronze.Stores;
 using Domain.Bronze.Todos;
 using Domain.Bronze.Users;
+using Domain.Silver.DimBrands;
+using Domain.Silver.DimCategories;
+using Domain.Silver.DimCustomers;
+using Domain.Silver.DimProducts;
+using Domain.Silver.DimStaffs;
+using Domain.Silver.DimStores;
+using Domain.Silver.FactInventories;
+using Domain.Silver.FactSales;
 using Infrastructure.DomainEvents;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -22,6 +30,7 @@ public sealed class ApplicationDbContext(
     IDomainEventsDispatcher domainEventsDispatcher)
     : DbContext(options), IApplicationDbContext
 {
+    // Bronze
     public DbSet<User> Users { get; set; }
 
     public DbSet<TodoItem> TodoItems { get; set; }
@@ -43,6 +52,23 @@ public sealed class ApplicationDbContext(
     public DbSet<Store> Stores { get; set; }
 
     public DbSet<Customer> Customers { get; set; }
+
+    // Silver
+    public DbSet<DimBrand> DimBrands { get; set; }
+
+    public DbSet<DimCategory> DimCategories { get; set; }
+
+    public DbSet<DimCustomer> DimCustomers { get; set; }
+
+    public DbSet<DimProduct> DimProducts { get; set; }
+
+    public DbSet<DimStaff> DimStaffs { get; set; }
+
+    public DbSet<DimStore> DimStores { get; set; }
+
+    public DbSet<FactInventory> FactInventory { get; set; }
+
+    public DbSet<FactSale> FactSales { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

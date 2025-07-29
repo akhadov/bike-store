@@ -18,8 +18,4 @@
 	<InternalsVisibleTo Include="ArchitectureTests" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Silver\" />
-  </ItemGroup>
-
 </Project>

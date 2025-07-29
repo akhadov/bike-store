@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CsvHelper.Configuration.Attributes;
-
-namespace Domain.Silver.DimCustomers;
+﻿namespace Domain.Silver.DimCustomers;
 
 public sealed class DimCustomer
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Quartz;
 
-namespace Infrastructure.BackgroundJobs;
+namespace Infrastructure.BackgroundJobs.SyncFromCsv;
 internal sealed class ProcessCsvSyncJobSetup : IConfigureOptions<QuartzOptions>
 {
     private readonly CsvSyncJobOptions _csvSyncJobOptions;
