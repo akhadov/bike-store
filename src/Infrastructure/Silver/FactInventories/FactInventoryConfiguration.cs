@@ -11,7 +11,7 @@ internal sealed class FactInventoryConfiguration : IEntityTypeConfiguration<Fact
     {
         builder.ToTable("fact_inventory", Schemas.Silver);
 
-        builder.HasKey(fi =>  new {fi.StoreId, fi.ProductId});
+        builder.HasKey(fi => new { fi.StoreId, fi.ProductId });
 
     }
 }
