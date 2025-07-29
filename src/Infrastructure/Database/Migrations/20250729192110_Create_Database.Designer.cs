@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250729141221_Create_Database")]
+    [Migration("20250729192110_Create_Database")]
     partial class Create_Database
     {
         /// <inheritdoc />
@@ -722,11 +722,8 @@ namespace Infrastructure.Database.Migrations
             modelBuilder.Entity("Domain.Silver.FactInventories.FactInventory", b =>
                 {
                     b.Property<int>("StoreId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("store_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("StoreId"));
 
                     b.Property<int>("ProductId")
                         .HasColumnType("integer")
@@ -736,7 +733,7 @@ namespace Infrastructure.Database.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("quantity");
 
-                    b.HasKey("StoreId")
+                    b.HasKey("StoreId", "ProductId")
                         .HasName("pk_fact_inventory");
 
                     b.ToTable("fact_inventory", "silver");

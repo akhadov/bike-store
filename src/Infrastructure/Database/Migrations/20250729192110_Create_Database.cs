@@ -187,14 +187,13 @@ namespace Infrastructure.Database.Migrations
                 schema: "silver",
                 columns: table => new
                 {
-                    store_id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    store_id = table.Column<int>(type: "integer", nullable: false),
                     product_id = table.Column<int>(type: "integer", nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_fact_inventory", x => x.store_id);
+                    table.PrimaryKey("pk_fact_inventory", x => new { x.store_id, x.product_id });
                 });
 
             migrationBuilder.CreateTable(
