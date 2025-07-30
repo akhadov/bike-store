@@ -17,21 +17,6 @@ internal sealed class SyncStocksCommandHandler(
     {
         await using DbConnection connection = await dbConnectionFactory.OpenConnectionAsync();
 
-        const string createSchemaSql = "CREATE SCHEMA IF NOT EXISTS bronze;";
-
-        await connection.ExecuteAsync(createSchemaSql);
-
-        const string createTableSql = $"""
-            CREATE TABLE IF NOT EXISTS bronze.stocks (
-                store_id integer NOT NULL,
-                product_id integer NOT NULL,
-                quantity integer NOT NULL,
-                CONSTRAINT pk_stocks PRIMARY KEY (store_id, product_id)
-            );
-            """;
-
-        await connection.ExecuteAsync(createTableSql);
-
         List<Stok> stocks = csvService.ReadCsv<Stok>(command.FilePath);
 
         if (!stocks.Any())
