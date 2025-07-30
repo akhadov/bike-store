@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Gold\" />
     <Folder Include="Silver\FactInventories\SyncInventories\" />
   </ItemGroup>
 
