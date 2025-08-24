@@ -26,25 +26,23 @@ internal sealed class ProcessBronzeSyncJob(
 {
     public async Task Execute(IJobExecutionContext context)
     {
-        CancellationToken cancellationToken = context.CancellationToken;
-
         logger.LogInformation("Beginning to process Bronze sync job");
 
-        await salesHandler.Handle(new SyncSalesCommand(), cancellationToken);
+        await salesHandler.Handle(new SyncSalesCommand(), context.CancellationToken);
 
-        await inventoriesHandler.Handle(new SyncInventoriesCommand(), cancellationToken);
+        await inventoriesHandler.Handle(new SyncInventoriesCommand(), context.CancellationToken);
 
-        await brandsHandler.Handle(new SyncBrandsCommand(), cancellationToken);
+        await brandsHandler.Handle(new SyncBrandsCommand(), context.CancellationToken);
 
-        await categoriesHandler.Handle(new SyncCategoriesCommand(), cancellationToken);
+        await categoriesHandler.Handle(new SyncCategoriesCommand(), context.CancellationToken);
 
-        await customersHandler.Handle(new SyncCustomersCommand(), cancellationToken);
+        await customersHandler.Handle(new SyncCustomersCommand(), context.CancellationToken);
 
-        await staffsHandler.Handle(new SyncStaffsCommand(), cancellationToken);
+        await staffsHandler.Handle(new SyncStaffsCommand(), context.CancellationToken);
 
-        await storesHandler.Handle(new SyncStoresCommand(), cancellationToken);
+        await storesHandler.Handle(new SyncStoresCommand(), context.CancellationToken);
 
-        await productsHandler.Handle(new SyncProductsCommand(), cancellationToken);
+        await productsHandler.Handle(new SyncProductsCommand(), context.CancellationToken);
 
         logger.LogInformation("ProcessBronzeSyncJob completed successfully");
     }

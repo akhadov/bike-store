@@ -30,27 +30,25 @@ internal sealed class ProcessCsvSyncJob(
 {
     public async Task Execute(IJobExecutionContext context)
     {
-        CancellationToken cancellationToken = context.CancellationToken;
-
         logger.LogInformation("Beginning to process CSV sync job");
 
-        await brandsHandler.Handle(new SyncBrandsCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "brands.csv")), cancellationToken);
+        await brandsHandler.Handle(new SyncBrandsCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "brands.csv")), context.CancellationToken);
 
-        await categoriesHandler.Handle(new SyncCategoriesCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "categories.csv")), cancellationToken);
+        await categoriesHandler.Handle(new SyncCategoriesCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "categories.csv")), context.CancellationToken);
 
-        await customersHandler.Handle(new SyncCustomersCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "customers.csv")), cancellationToken);
+        await customersHandler.Handle(new SyncCustomersCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "customers.csv")), context.CancellationToken);
 
-        await staffsHandler.Handle(new SyncStaffsCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "staffs.csv")), cancellationToken);
+        await staffsHandler.Handle(new SyncStaffsCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "staffs.csv")), context.CancellationToken);
 
-        await storesHandler.Handle(new SyncStoresCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "stores.csv")), cancellationToken);
+        await storesHandler.Handle(new SyncStoresCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "stores.csv")), context.CancellationToken);
 
-        await productsHandler.Handle(new SyncProductsCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "products.csv")), cancellationToken);
+        await productsHandler.Handle(new SyncProductsCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "products.csv")), context.CancellationToken);
 
-        await ordersHandler.Handle(new SyncOrdersCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "orders.csv")), cancellationToken);
+        await ordersHandler.Handle(new SyncOrdersCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "orders.csv")), context.CancellationToken);
 
-        await stocksHandler.Handle(new SyncStocksCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "stocks.csv")), cancellationToken);
+        await stocksHandler.Handle(new SyncStocksCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "stocks.csv")), context.CancellationToken);
 
-        await orderItemsHandler.Handle(new SyncOrderItemsCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "order_items.csv")), cancellationToken);
+        await orderItemsHandler.Handle(new SyncOrderItemsCommand(Path.Combine(csvSyncJobOptions.Value.CsvFolderPath, "order_items.csv")), context.CancellationToken);
 
         logger.LogInformation("Completed processing CSV sync job");
     }
